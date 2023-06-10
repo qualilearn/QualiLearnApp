@@ -1,0 +1,225 @@
+/* Custom styles for the menu */
+.menu-bar {
+    background-color: #f8f9fa;
+    padding: 10px;
+}
+
+.menu-bar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-bar ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.menu-bar ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.menu-bar ul li a:hover {
+    background-color: #e9ecef;
+}
+
+/* Custom styles for the table block */
+.table-block {
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom styles for the table */
+.table-block table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-block th,
+.table-block td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Custom styles for enroll buttons */
+.enroll-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.enroll-btn:hover {
+    background-color: #0069d9;
+}
+
+/* Custom styles for completed enrollment */
+.completed-enrollment {
+    color: green;
+    font-weight: bold;
+}
+
+/* Custom styles for knowledge test link */
+.knowledge-test-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.knowledge-test-link:hover {
+    text-decoration: underline;
+}
+
+/* Custom styles for the user block */
+.user {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+/* Styles for lecture contact */
+.user h6 {
+    margin-bottom: 5px;
+}
+
+/* Styles for non-user role */
+.non-user {
+    color: #6c757d;
+}
+
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h2 {
+    color: #007bff;
+    margin-top: 0;
+}
+
+h4 {
+    color: #6c757d;
+}
+
+h6 {
+    color: #343a40;
+    margin-top: 0;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+/* Styles for user profile image */
+.profile-image {
+    float: left;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
+
+/* Styles for user profile details */
+.profile-details {
+    overflow: auto;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+}
+
+.profile-details h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.profile-details p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+/* Container styles */
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styles */
+h1 {
+    font-size: 24px;
+    color: #007bff;
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form styles */
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.delete-btn {
+    background-color: red;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.delete-btn:hover {
+    background-color: orangered;
+}
+
+
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<div class="container">
+    <h1>User Registration</h1>
+    <form th:action="@{/register}" method="post" th:object="${userDto}">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" class="form-control" id="username" th:field="*{username}" required/>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" th:field="*{password}" required minlength="10"/>
+                    <small class="form-text text-danger" th:errors="*{password}"></small>
+                </div>
+                <div class="form-group">
+                    <label for="role">Role:</label>
+                    <select class="form-control" id="role" th:field="*{role}" required>
+                        <option value="Student">Student</option>
+                        <option value="Lecturer">Lecturer</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}" required/>
+                </div>
+                <div class="form-group">
+                    <label for="surname">Surname:</label>
+                    <input type="text" class="form-control" id="surname" th:field="*{surname}" required/>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="text" class="form-control" id="phone" th:field="*{phone}" required maxlength="10"/>
+                    <small class="form-text text-danger" th:errors="*{phone}"></small>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="imageUrl">Image URL:</label>
+            <input type="text" class="form-control" id="imageUrl" th:field="*{imageUrl}" required/>
+        </div>
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" class="form-control" id="age" th:field="*{age}" required/>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

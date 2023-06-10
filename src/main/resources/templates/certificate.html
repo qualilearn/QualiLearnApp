@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Welcome to Spring Security Thymeleaf tutorial</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+    <nav class="menu-bar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/courses">Courses</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/certificate">Certificate</a></li>
+            <li><a href="/deposits">Deposits</a></li>
+            <li><a href="/match">Match</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2 class="mt-4">Generate Certificate</h2>
+        <table class="table mt-4">
+            <thead class="table-dark">
+            <tr>
+                <th>Course Name</th>
+                <th>Download Link</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${completeEnrollments.isEmpty()}">
+                <td colspan="2">Please complete tests before generating certificates!</td>
+            </tr>
+            <tr th:each="enrollment : ${completeEnrollments}">
+                <td>
+                    <span th:text="${courses.get(enrollment.getCourseId()).getTitle()}">Name</span>
+                </td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{/download/pdf/{id}(id=${enrollment.getCourseId()})}" download>Download PDF</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

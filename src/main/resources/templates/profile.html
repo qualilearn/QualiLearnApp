@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Welcome to Spring Security Thymeleaf tutorial</title>
+  <link rel="stylesheet" href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    /* Styles for user profile image */
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Styles for user profile details */
+    .profile-details {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: #f8f9fa;
+    }
+
+    .profile-details h4 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .profile-details p {
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <nav class="menu-bar">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/courses">Courses</a></li>
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/certificate">Certificate</a></li>
+      <li><a href="/deposits">Deposits</a></li>
+      <li><a href="/match">Match</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <h2>User Profile</h2>
+    <div class="profile-card">
+      <div>
+        <img class="profile-image" th:if="${user.imageUrl}" th:src="${user.imageUrl}" alt="Profile Image" />
+        <span class="profile-image" th:unless="${user.imageUrl}">No image available</span>
+      </div>
+      <div class="profile-details">
+        <p><strong>Name:</strong> <span th:text="${user.name}"></span></p>
+        <p><strong>Surname:</strong> <span th:text="${user.surname}"></span></p>
+        <p><strong>Username:</strong> <span th:text="${user.username}"></span></p>
+        <p><strong>Role:</strong> <span th:text="${user.role}"></span></p>
+        <p><strong>Phone:</strong> <span th:text="${user.phone}"></span></p>
+        <p><strong>Age:</strong> <span th:text="${user.age}"></span></p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Welcome to Spring Security Thymeleaf tutorial</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        h4 {
+            color: #6c757d;
+        }
+
+        h6 {
+            color: #343a40;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .user-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .non-user-section {
+            color: #6c757d;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="menu-bar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/courses">Courses</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/certificate">Certificate</a></li>
+            <li><a href="/deposits">Deposits</a></li>
+            <li><a href="/match">Match</a></li>
+        </ul>
+    </nav>
+<div class="container">
+    <div class="user-section" sec:authorize="hasRole('STUDENT')">
+        <h2>Here you will match with a lecture who can help you with courses</h2>
+        <h4>Contact details of your lecture</h4>
+        <div>
+            <h6>Name</h6>
+            <p th:text="${lecturer.getName() + ' ' + lecturer.getSurname()}"></p>
+        </div>
+        <div>
+            <h6>Phone</h6>
+            <p th:text="${lecturer.getPhone()}"></p>
+        </div>
+    </div>
+    <div class="non-user-section" sec:authorize="!hasRole('STUDENT')">
+        <h2>Students will contact you by your phone</h2>
+    </div>
+</div>
+</body>
+</html>

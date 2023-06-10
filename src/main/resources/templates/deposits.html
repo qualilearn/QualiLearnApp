@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Welcome to Spring Security Thymeleaf tutorial</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<nav class="menu-bar">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/courses">Courses</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/certificate">Certificate</a></li>
+        <li><a href="/deposits">Deposits</a></li>
+        <li><a href="/match">Match</a></li>
+    </ul>
+</nav>
+<h2>Welcome</h2>
+<p>Deposit information</p>
+
+<!--Only for admin logic-->
+<div sec:authorize="hasRole('ADMIN')" class="table-block">
+    <h2>All deposits created at system</h2>
+    <table>
+        <thead>
+        <tr>
+            <th> Id </th>
+            <th> User Name </th>
+            <th> Action </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${deposits.isEmpty()}">
+            <td colspan="2"> No deposits in the system </td>
+        </tr>
+        <tr th:each="deposit : ${deposits}">
+            <td><span th:text="${deposit.id}"> Title </span></td>
+            <td><span th:text="${deposit.username}"> Username </span></td>
+            <td>
+                <form action="#" method="POST" th:action="@{/deleteDeposit}" th:object="${deleteDepositDto}">
+                    <input style="display: none" type="number" name="id" th:value="${deposit.id}" />
+                    <button type="submit" name="submit" value="value" class="delete-btn">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="user">
+        <h3>Create a deposit</h3>
+        <form action="#" method="POST" th:action="@{/deposit}">
+            <button type="submit" name="submit" value="value" class="enroll-btn">Create</button>
+        </form>
+    </div>
+</div>
+
+<!--Logic for other users-->
+<div sec:authorize="hasRole('STUDENT') OR hasRole('LECTURER')" class="table-block">
+    <h2>Your deposit</h2>
+    <table>
+        <thead>
+        <tr>
+            <th> Id </th>
+            <th> Action </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${deposits.isEmpty()}">
+            <td colspan="2"> No deposits in the system </td>
+        </tr>
+        <tr th:each="deposit : ${deposits}">
+            <td><span th:text="${deposit.id}"> Title </span></td>
+            <td>
+                <form action="#" method="POST" th:action="@{/deleteDeposit}" th:object="${deleteDepositDto}">
+                    <input style="display: none" type="number" name="id" th:value="${deposit.id}" />
+                    <button type="submit" name="submit" value="value" class="delete-btn">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${deposits.isEmpty()}">
+        <div class="user">
+            <h3>Create a deposit</h3>
+            <form action="#" method="POST" th:action="@{/deposit}">
+                <button type="submit" name="submit" value="value" class="enroll-btn">Create</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

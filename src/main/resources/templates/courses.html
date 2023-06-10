@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Welcome to Spring Security Thymeleaf tutorial</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+    <nav class="menu-bar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/courses">Courses</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/certificate">Certificate</a></li>
+            <li><a href="/deposits">Deposits</a></li>
+            <li><a href="/match">Match</a></li>
+        </ul>
+    </nav>
+    <p>All courses</p>
+    <div class="table-block">
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Hours to study</th>
+                <th>Enroll</th>
+                <th>View</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${courses.isEmpty()}">
+                <td colspan="5">No courses in the system</td>
+            </tr>
+            <tr th:each="course : ${courses}">
+                <td><span th:text="${course.id}">Id</span></td>
+                <td><span th:text="${course.title}">Title</span></td>
+                <td><span th:text="${course.description}">Description</span></td>
+                <td><span th:text="${course.hours}">Hours</span></td>
+                <td>
+                    <div sec:authorize="hasRole('LECTURER')">
+                        <div th:if="${userPaid}">
+                            <form th:if="${courseIdEnrollments.get(course.getId()) == null}" action="#" method="POST" th:action="@{/enrollment}" th:object="${enrollmentDto}">
+                                <input style="display: none" type="text" name="enrollmentStatus" value="STARTED" />
+                                <input style="display: none" type="number" name="courseId" id="courseId" th:value="${course.id}" />
+                                <button class="enroll-btn">Enroll</button>
+                            </form>
+                            <div th:if="${courseIdEnrollments.get(course.getId()) != null}">
+                                <form th:if="${#strings.equals(courseIdEnrollments.get(course.getId()).getEnrollmentStatus(), 'STARTED')}" action="#" method="POST" th:action="@{/complete}" th:object="${enrollment}">
+                                    <input style="display: none" type="text" name="enrollmentStatus" value="COMPLETED" />
+                                    <input style="display: none" type="number" name="courseId" id="courseId" th:value="${course.id}" />
+                                    <button>Complete</button>
+                                </form>
+                                <div th:if="${#strings.equals(courseIdEnrollments.get(course.getId()).getEnrollmentStatus(), 'COMPLETED')}">
+                                    <div class="completed-enrollment">Completed</div>
+                                    <div>
+                                        <a class="knowledge-test-link" th:href="${course.getKnowledgeTestUrl()}" target="_blank" rel="noopener noreferrer">Pass knowledge test</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:if="${!userPaid}">
+                            <div><a href="/deposits"> Pay</a> the deposit!</div>
+                        </div>
+                    </div>
+                    <div sec:authorize="!hasRole('LECTURER')">
+                        <div th:if="${!course.paid}">
+                            <form th:if="${courseIdEnrollments.get(course.getId()) == null}" action="#" method="POST" th:action="@{/enrollment}" th:object="${enrollmentDto}">
+                                <input style="display: none" type="text" name="enrollmentStatus" value="STARTED" />
+                                <input style="display: none" type="number" name="courseId" id="courseId" th:value="${course.id}" />
+                                <button class="enroll-btn">Enroll</button>
+                            </form>
+                            <div th:if="${courseIdEnrollments.get(course.getId()) != null}">
+                                <form th:if="${#strings.equals(courseIdEnrollments.get(course.getId()).getEnrollmentStatus(), 'STARTED')}" action="#" method="POST" th:action="@{/complete}" th:object="${enrollment}">
+                                    <input style="display: none" type="text" name="enrollmentStatus" value="COMPLETED" />
+                                    <input style="display: none" type="number" name="courseId" id="courseId" th:value="${course.id}" />
+                                    <button>Complete</button>
+                                </form>
+                                <div th:if="${#strings.equals(courseIdEnrollments.get(course.getId()).getEnrollmentStatus(), 'COMPLETED')}">
+                                    <div class="completed-enrollment">Completed</div>
+                                    <div>
+                                        <a class="knowledge-test-link" th:href="${course.getKnowledgeTestUrl()}" target="_blank" rel="noopener noreferrer">Pass knowledge test</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:if="${course.paid && userPaid}">
+                            <form th:if="${courseIdEnrollments.get(course.getId()) == null}" action="#" method="POST" th:action="@{/enrollment}" th:object="${enrollmentDto}">
+                                <input style="display: none" type="text" name="enrollmentStatus" value="STARTED" />
+                                <input style="display: none" type="number" name="courseId" id="courseId" th:value="${course.id}" />
+                                <button class="enroll-btn">Enroll</button>
+                            </form>
+                            <div th:if="${courseIdEnrollments.get(course.getId()) != null}">
+                                <form th:if="${#strings.equals(courseIdEnrollments.get(course.getId()).getEnrollmentStatus(), 'STARTED')}" action="#" method="POST" th:action="@{/complete}" th:object="${enrollment}">
+                                    <input style="display: none" type="text" name="enrollmentStatus" value="COMPLETED" />
+                                    <input style="display: none" type="number" name="courseId" id="courseId" th:value="${course.id}" />
+                                    <button>Complete</button>
+                                </form>
+                                <div th:if="${#strings.equals(courseIdEnrollments.get(course.getId()).getEnrollmentStatus(), 'COMPLETED')}">
+                                    <div class="completed-enrollment">Completed</div>
+                                    <div>
+                                        <a class="knowledge-test-link" th:href="${course.getKnowledgeTestUrl()}" target="_blank" rel="noopener noreferrer">Pass knowledge test</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:if="${course.paid && !userPaid}">
+                            <div><a href="/deposits"> Pay</a> the deposit!</div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <form action="/course">
+                        <input type="submit" class="enroll-btn" value="View" />
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p>After completing the knowledge test, please return to the application to access the <a href="/certificate">certificate generating</a> page.</p>
+</body>
+</html>
